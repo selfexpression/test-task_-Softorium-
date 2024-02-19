@@ -1,0 +1,151 @@
+$main-stack-colors: 
+#FF6633, 
+#0099CC, 
+#84D1ED, 
+#725CA8, 
+#2F7BBF, 
+#2671A2,
+#5ae328, 
+#4800ff,
+#c81010,
+#03af9e;
+
+$more-stack-colors:
+#FF6633, 
+#0099CC, 
+#84D1ED, 
+#725CA8, 
+#2F7BBF, 
+#2671A2,
+#5ae328;
+
+.title {
+  position: relative;
+  padding: 10em 0em 2em 1em;
+
+  h1 {
+    font-size: 72px;
+    line-height: 72px;
+    margin: 0;
+  }
+
+  h1:nth-child(2) {
+    display: inline-block;
+    background-image: linear-gradient(93.29deg, #0099CC 4.64%, #FF6633 58.75%);
+    background-clip: text;
+    color: transparent;
+  }
+
+  &::after {
+    position: absolute;
+    width: 33.3em;
+    height: 1px;
+    bottom: 0;
+    left: -7.5em;
+    background: 
+      linear-gradient(93.29deg, #0099CC 14.64%, #FF6633 65.65%),
+      linear-gradient(0deg, #BCBCBC, #BCBCBC);
+
+    content: "";
+  }
+}
+
+.main-text {
+  font-size: 30px;
+  line-height: 36.31px;
+  color: #363636;
+}
+
+.vacancy-info {
+  position: relative;
+  padding: 2.5em;
+  margin-top: 4em;
+  background-color: white;
+  border-radius: 5em;
+  box-shadow: 20px 20px 100px rgb(221, 216, 216);
+
+  .vacancy-title {
+    margin: 0;
+    font-size: 24px;
+    line-height: 38.4px;
+  }
+
+  .main-stack, .more-stack {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 1em;
+
+    span {
+      font-size: 16px;
+      line-height: 25px;
+      color: #000000;
+    }
+
+    .technology {
+      padding: 0.4em;
+      border-top-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+  }
+
+  .main-stack {
+    .technology {
+      @for $i from 1 through length($main-stack-colors) {
+        &:nth-of-type(#{$i}) {
+          background-color: nth($main-stack-colors, $i);
+        }
+      }
+    }
+  }
+
+  .more-stack {
+    .technology {
+      @for $i from 1 through length($more-stack-colors) {
+        &:nth-of-type(#{$i}) {
+          background-color: nth($more-stack-colors, $i);
+        }
+      }
+    }
+  }
+
+  button {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    top: 2em;
+    right: 6em;
+    color: #0099CC;
+    border: 1px solid rgba(0, 153, 204, 0.4);
+    border-radius: 50%;
+    background-color: transparent;
+
+    &::before {
+      position: absolute;
+      width: 0.5em;
+      height: 70px;
+      top: 6em;
+      right: 0.2em;
+      background-color: #0099CC;
+      border-radius: 1em;
+      transform: rotate(-45deg);
+      content: "";
+    }
+
+    &::after {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      top: 7.9em;
+      right: -1.6em;
+      border: solid #0099CC;
+      border-width: 0 0.5em 0.5em 0;
+      border-radius: 0.5em;
+      content: "";
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 15em;
+  }
+}

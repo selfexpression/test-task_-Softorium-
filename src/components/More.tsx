@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import cn from 'classnames';
 
 import { getDataState } from '../utils/selectors';
 import { apiRoutes } from '../utils/routes';
@@ -27,7 +28,7 @@ const AddInfo: React.FC<AddInfoProps> = ({ currentVacancyInfo, keyProp }) => {
     <>
       <h4>{t(`more.title.${keyProp}`)}</h4>
       {items.map(({ name }: NamedEntity) => (
-        <div key={name} className={keyProp}>
+        <div key={name} className={`sm-text ${keyProp}`}>
           {name}
         </div>
       ))}
@@ -62,19 +63,30 @@ const MoreItem: React.FC<MoreItemProps> = ({ currentVacancyInfo }) => {
     <>
       {morePageImages.map(({ src, id }) => (
         <div key={id} className={`item-${id}`}>
-          {id === 1 && <p>{t('more.text')}</p>}
+          {(() => {
+            switch (id) {
+              case 1:
+                return <p className="sm-text">{t('more.text')}</p>;
+              case 2:
+                return <MoreStackWrapper currentVacancyInfo={currentVacancyInfo} />;
+              case 3:
+              case 4:
+                return (
+                  <div className={cn('sm-text', {
+                    'tasks-wrapper': id === 3,
+                    'list-offer-wrapper': id === 4,
+                  })}>
+                    <AddInfo
+                      currentVacancyInfo={currentVacancyInfo}
+                      keyProp={id === 3 ? 'tasks' : 'list_offer'}
+                    />
+                  </div>
+                );
+              default:
+                return null;
+            }
+          })()}
           <img src={src} alt={`item-${id}`} className='image' />
-          {id === 2 && (
-            <MoreStackWrapper currentVacancyInfo={currentVacancyInfo} />
-          )}
-          {(id === 3 || id === 4) && (
-            <div className={id === 3 ? 'tasks-wrapper' : 'list-offer-wrapper'}>
-              <AddInfo
-                currentVacancyInfo={currentVacancyInfo}
-                keyProp={id === 3 ? 'tasks' : 'list_offer'}
-              />
-            </div>
-          )}
         </div>
       ))}
     </>

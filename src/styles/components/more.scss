@@ -4,10 +4,11 @@
 .more-page-container {
   .more-title {
     margin-top: 10em;
-    padding-bottom: 5em;
+    padding-bottom: 2em;
 
     h2 {
       display: inline-block;
+      margin-top: 0.2em;
       @include mixin.text-bg-gradient;
     }
   }
@@ -25,6 +26,28 @@
       object-position: center;
       border-radius: 15em;
     }
+    
+    > * {
+      flex: 0 1 50%;
+    }
+
+    &:nth-child(odd) {
+      flex-direction: row-reverse;
+
+      .image {
+        margin-right: 5em;
+      }
+    }
+
+    &:nth-child(even) {
+      .image {
+        margin-left: 5em;
+      }
+    }
+
+    &:last-of-type {
+      margin-bottom: 15em;
+    }
   }
 
   .item-2 {
@@ -35,7 +58,10 @@
 
       .requirements {
         .min_requirements {
-          margin: 0.5em 0.5em 0.5em 2em;
+          position: relative;
+          margin-left: 2.5em;
+
+          @include mixin.vector-element;
         }
       }
 
@@ -63,5 +89,23 @@
       @include mixin.stack-icon-bg-color(variable.$more-stack-colors);
     }
    } 
+  }
+
+  .tasks-wrapper {
+    .tasks {
+      position: relative;
+      margin-left: 2em;
+
+      @include mixin.vector-element(#0099CC);
+    }
+  }
+
+  .list-offer-wrapper {
+    .list_offer {
+      position: relative;
+      margin-left: 2em;
+
+      @include mixin.vector-element;
+    }
   }
 }

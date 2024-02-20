@@ -3,6 +3,19 @@ export const ru = {
     lang: {
       currentLang: 'ru',
     },
+    main: {
+      title: {
+        1: 'Хочешь работать над',
+        2: 'интересными проектами?',
+        3: 'Frontend Developer',
+      },
+      text: {
+        1: 'в команду Softorium требуются:',
+        2: 'Основной стек:',
+        3: 'Будет плюсом, если владеете:',
+      },
+      buttonText: 'Подробнее',
+    },
     more: {
       title: {
         1: 'Ищем Frontend Developer`а',

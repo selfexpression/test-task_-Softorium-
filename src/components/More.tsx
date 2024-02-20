@@ -1,27 +1,27 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 
 import { getDataState } from '../utils/selectors';
 import { apiRoutes } from '../utils/routes';
-import { actions as dataActions } from '../slices/dataSlice';
+import type { AppDispatch } from '../types/aliases';
 import type { CurrentVacancyInfo, NamedEntity } from '../types/interfaces';
 import { morePageImages } from '../assets/images';
+import { loadData } from '../thunks';
 
 interface MoreItemProps {
   currentVacancyInfo: CurrentVacancyInfo | null;
 }
 
 interface AddInfoProps extends MoreItemProps {
-  keyProp: keyof CurrentVacancyInfo;
+  keyProp: keyof CurrentVacancyInfo | string;
 }
 
 const AddInfo: React.FC<AddInfoProps> = ({ currentVacancyInfo, keyProp }) => {
   const { t } = useTranslation();
 
   if (!currentVacancyInfo) return null;
-  const items = currentVacancyInfo[keyProp] as NamedEntity[];
+  const items = currentVacancyInfo[keyProp as keyof CurrentVacancyInfo] as NamedEntity[];
 
   return (
     <>
@@ -35,6 +35,26 @@ const AddInfo: React.FC<AddInfoProps> = ({ currentVacancyInfo, keyProp }) => {
   );
 };
 
+const MoreStackWrapper: React.FC<MoreItemProps> = ({ currentVacancyInfo }) => {
+  const moreStackNames = {
+    requirements: 'min_requirements',
+    technologies: 'more_technologies',
+  };
+
+  return (
+    <div className="more-stack-wrapper">
+      {Object.entries(moreStackNames).map(([key, value]) => (
+        <div key={key} className={key}>
+          <AddInfo
+            currentVacancyInfo={currentVacancyInfo}
+            keyProp={value}
+          />
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const MoreItem: React.FC<MoreItemProps> = ({ currentVacancyInfo }) => {
   const { t } = useTranslation();
 
@@ -45,20 +65,7 @@ const MoreItem: React.FC<MoreItemProps> = ({ currentVacancyInfo }) => {
           {id === 1 && <p>{t('more.text')}</p>}
           <img src={src} alt={`item-${id}`} className='image' />
           {id === 2 && (
-            <div className="more-stack-wrapper">
-              <div className="requirements">
-                <AddInfo
-                  currentVacancyInfo={currentVacancyInfo}
-                  keyProp="min_requirements"
-                />
-              </div>
-              <div className="technologies">
-                <AddInfo
-                  currentVacancyInfo={currentVacancyInfo}
-                  keyProp="more_technologies"
-                />
-              </div>
-            </div>
+            <MoreStackWrapper currentVacancyInfo={currentVacancyInfo} />
           )}
           {(id === 3 || id === 4) && (
             <div className={id === 3 ? 'tasks-wrapper' : 'list-offer-wrapper'}>
@@ -76,16 +83,14 @@ const MoreItem: React.FC<MoreItemProps> = ({ currentVacancyInfo }) => {
 
 export const More: React.FC = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { currentVacancyInfo } = useSelector(getDataState);
 
   useEffect(() => {
-    const getData = async () => {
-      const response = await axios.get(apiRoutes.frontendVacancy());
-      dispatch(dataActions.setCurrentVacancyInfo(response.data));
-    };
-
-    getData();
+    dispatch(loadData({
+      apiRoute: apiRoutes.frontendVacancy(),
+      dataType: 'currentVacancyInfo',
+    }));
   }, [dispatch]);
 
   return (

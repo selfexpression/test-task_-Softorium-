@@ -1,27 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-type NamedEntity = {
-  name: string;
-}
-
-interface VacancyList {
-  id: number;
-  main_technologies: NamedEntity[];
-  more_technologies: NamedEntity[];
-  name: string;
-  slug: string;
-}
-
-interface currentVacancyInfo extends VacancyList {
-  min_requirements: NamedEntity[];
-  tasks: NamedEntity[];
-  list_offer: NamedEntity[];
-  salary: string;
-  is_active: boolean;
-}
+import { VacancyList, CurrentVacancyInfo } from '../types/interfaces';
 
 const initialState: {
-  vacancyList: VacancyList[], currentVacancyInfo: currentVacancyInfo | null
+  vacancyList: VacancyList[], currentVacancyInfo: CurrentVacancyInfo | null
 } = {
   vacancyList: [],
   currentVacancyInfo: null,
@@ -34,7 +16,7 @@ const slice = createSlice({
     setVacancyList: (state, { payload }: { payload: VacancyList[] }) => {
       state.vacancyList = [...state.vacancyList, ...payload];
     },
-    setCurrentVacancyInfo: (state, { payload }: { payload: currentVacancyInfo }) => {
+    setCurrentVacancyInfo: (state, { payload }: { payload: CurrentVacancyInfo }) => {
       state.currentVacancyInfo = payload;
     },
   },

@@ -26,6 +26,7 @@ $more-stack-colors:
   h1 {
     font-size: 72px;
     line-height: 72px;
+    color: #08162A;
     margin: 0;
   }
 
@@ -41,7 +42,7 @@ $more-stack-colors:
     width: 33.3em;
     height: 1px;
     bottom: 0;
-    left: -7.5em;
+    left: calc(-50vw + 50%);
     background: 
       linear-gradient(93.29deg, #0099CC 14.64%, #FF6633 65.65%),
       linear-gradient(0deg, #BCBCBC, #BCBCBC);
@@ -119,6 +120,7 @@ $more-stack-colors:
     border: 1px solid rgba(0, 153, 204, 0.4);
     border-radius: 50%;
     background-color: transparent;
+    cursor: pointer;
 
     &::before {
       position: absolute;

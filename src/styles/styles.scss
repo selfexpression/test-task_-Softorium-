@@ -10,11 +10,11 @@ body {
   background-color: #FFFFFF;
 }
 
-.main-page-container {
+#root {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
 
-  header, main {
+  header, main, .more-page-container {
     grid-column: 2 / 12;
   }
 }

@@ -1,29 +1,41 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-type Technology = {
+type NamedEntity = {
   name: string;
 }
 
-type Stack = Technology[];
-
-interface Data {
+interface VacancyList {
   id: number;
-  main_technologies: Stack;
-  more_technologies: Stack;
+  main_technologies: NamedEntity[];
+  more_technologies: NamedEntity[];
   name: string;
   slug: string;
 }
 
-const initialState: { data: Data[] } = {
-  data: [],
+interface currentVacancyInfo extends VacancyList {
+  min_requirements: NamedEntity[];
+  tasks: NamedEntity[];
+  list_offer: NamedEntity[];
+  salary: string;
+  is_active: boolean;
+}
+
+const initialState: {
+  vacancyList: VacancyList[], currentVacancyInfo: currentVacancyInfo | null
+} = {
+  vacancyList: [],
+  currentVacancyInfo: null,
 };
 
 const slice = createSlice({
   name: 'data',
   initialState,
   reducers: {
-    setData: (state, { payload }: { payload: Data[] }) => {
-      state.data = [...state.data, ...payload];
+    setVacancyList: (state, { payload }: { payload: VacancyList[] }) => {
+      state.vacancyList = [...state.vacancyList, ...payload];
+    },
+    setCurrentVacancyInfo: (state, { payload }: { payload: currentVacancyInfo }) => {
+      state.currentVacancyInfo = payload;
     },
   },
 });

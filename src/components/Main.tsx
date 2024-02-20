@@ -1,29 +1,30 @@
 /* eslint-disable camelcase */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { actions as dataActions } from '../slices/dataSlice';
 import { getDataState } from '../utils/selectors';
-import { apiRoutes } from '../utils/routes';
+import { apiRoutes, pageRoutes } from '../utils/routes';
 
 export const Main: React.FC = (): React.JSX.Element => {
   const dispatch = useDispatch();
-  const { data } = useSelector(getDataState);
-  const frontendVacancies = data.filter((item) => item.id === 3);
+  const { vacancyList } = useSelector(getDataState);
+  const frontendVacancies = vacancyList.filter((item) => item.id === 3);
   const [vacancy] = frontendVacancies;
 
   useEffect(() => {
     const getData = async () => {
       const response = await axios.get(apiRoutes.vacancies());
-      dispatch(dataActions.setData(response.data));
+      dispatch(dataActions.setVacancyList(response.data));
     };
 
     getData();
-  }, []);
+  }, [dispatch]);
 
   return (
-    <div className="main-page-container">
+    <>
       <header>
         <div className="title">
           <h1>Хочешь работать над</h1>
@@ -51,10 +52,12 @@ export const Main: React.FC = (): React.JSX.Element => {
                 </div>
               ))}
             </div>
-            <button type="button" aria-label="more info">Подробнее</button>
+            <Link to={pageRoutes.more()}>
+              <button type="button" aria-label="more info">Подробнее</button>
+            </Link>
           </div>
         ))}
       </main>
-    </div>
+    </>
   );
 };

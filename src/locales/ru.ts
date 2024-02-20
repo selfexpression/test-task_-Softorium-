@@ -18,8 +18,9 @@ export const ru = {
     },
     more: {
       title: {
-        1: 'Ищем Frontend Developer`а',
-        2: 'Трудоустройство в аккредитованную ИТ-компанию',
+        lookingFor: 'Ищем Frontend Developer`а',
+        employment: 'Трудоустройство в аккредитованную ИТ-компанию',
+        salary: 'предлагаем от 150.000р на руки + печеньки',
         min_requirements: 'Необходимый минимум:',
         more_technologies: 'Преимуществом будет знание:',
         tasks: 'Чем предстоит заниматься:',

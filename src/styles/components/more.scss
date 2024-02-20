@@ -112,6 +112,12 @@
 
 @media screen and (min-width: 320px) and (max-width: 1200px) {
   .more-page-container {
+    .more-title {
+      h2 {
+        margin: 0;
+      }
+    }
+
     .more-title, .item-1, .item-2, .item-3, .item-4{
       padding: 0 2em 0 2em;
     }

@@ -3,7 +3,7 @@
 
 .title {
   position: relative;
-  padding: 10em 0em 2em 1em;
+  padding: 5em 0em 2em 1em;
 
   h1:nth-child(2) {
     display: inline-block;
@@ -12,7 +12,7 @@
 
   &::after {
     position: absolute;
-    width: 33.3em;
+    width: 35vw;
     height: 1px;
     bottom: 0;
     left: calc(-50vw + 50%);
@@ -95,5 +95,36 @@
 
   &:last-child {
     margin-bottom: 15em;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 1200px) {
+  header, main {
+    padding: 1em;
+  }
+  .vacancy-info {
+    .main-stack, .more-stack {
+      flex-wrap: wrap;
+
+      p {
+        flex-basis: 100%;
+      }
+    }
+
+    a {
+      button {
+        top: 90%;
+        right: 2em;
+        z-index: -1;
+      }
+    }
+  }
+
+  .vacancy-info ~ .vacancy-info {
+    margin-top: 10em;
+  }
+
+  .l-text {
+    text-align: end;
   }
 }

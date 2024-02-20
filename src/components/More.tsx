@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
+import { useMediaQuery } from '@reactuses/core';
 
 import { getDataState } from '../utils/selectors';
 import { apiRoutes } from '../utils/routes';
@@ -95,6 +96,7 @@ const MoreItem: React.FC<MoreItemProps> = ({ currentVacancyInfo }) => {
 
 export const More: React.FC = () => {
   const { t } = useTranslation();
+  const isWide = useMediaQuery('(min-width: 736px)');
   const dispatch = useDispatch<AppDispatch>();
   const { currentVacancyInfo } = useSelector(getDataState);
 
@@ -108,8 +110,10 @@ export const More: React.FC = () => {
   return (
     <div className="more-page-container">
       <div className="more-title">
-        <h1>{t('more.title.1')}</h1>
-        <h2>{t('more.title.2')}</h2>
+        <h1>{t('more.title.lookingFor')}</h1>
+        {isWide
+          ? <h2>{t('more.title.employment')}</h2>
+          : <h2>{t('more.title.salary')}</h2>}
       </div>
       <MoreItem currentVacancyInfo={currentVacancyInfo} />
     </div>

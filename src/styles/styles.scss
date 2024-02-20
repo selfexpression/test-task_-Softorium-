@@ -1,4 +1,6 @@
 @use "./components/index.scss";
+@use "./variables.scss" as variable;
+@use "./mixins.scss" as mixin;
 
 * {
   box-sizing: border-box;
@@ -7,7 +9,11 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #FFFFFF;
+  background-color: variable.$light-color;
+}
+
+h1, h2, h3 {
+  margin: 0;
 }
 
 #root {
@@ -16,5 +22,18 @@ body {
 
   header, main, .more-page-container {
     grid-column: 2 / 12;
+  }
+}
+
+@each $value, $font-size, $line-height, $color in (
+  ('h1', variable.$h1-font-size, variable.$h1-line-height, variable.$dark-color),
+  ('h2', variable.$h2-font-size, variable.$h2-line-height, transparent),
+  ('h3', variable.$h3-font-size, variable.$h3-line-height, variable.$dark-color),
+  ('h4', variable.$h4-font-size, variable.$h4-line-height, variable.$dark-color),
+  ('.sm-text', variable.$p-sm-text-font-size, variable.$p-sm-text-line-height, variable.$dark-color),
+  ('.l-text', variable.$p-l-text-font-size, variable.$p-l-text-line-height, variable.$dark-black-color),
+) {
+  #{$value} {
+    @include mixin.text-style($font-size, $line-height, $color);
   }
 }

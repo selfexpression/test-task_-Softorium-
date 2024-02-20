@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -32,12 +31,12 @@ export const Main: React.FC = (): React.JSX.Element => {
         </div>
       </header>
       <main>
-        <p className="main-text">в команду Softorium требуются:</p>
+        <p className="l-text">в команду Softorium требуются:</p>
         {Array.from({ length: 5 }).map((_, index) => (
           <div key={index} className="vacancy-info">
-            <h4 className="vacancy-title">Frontend Developer</h4>
+            <h3 className="vacancy-title">Frontend Developer</h3>
             <div className="main-stack">
-              <span>Основной стек:</span>
+              <p className="sm-text">Основной стек:</p>
               {vacancy?.main_technologies.map(({ name }) => (
                 <div key={name} className="technology">
                   {name}
@@ -45,7 +44,7 @@ export const Main: React.FC = (): React.JSX.Element => {
               ))}
             </div>
             <div className="more-stack">
-              <span>Будет плюсом, если владеете:</span>
+              <span className="sm-text">Будет плюсом, если владеете:</span>
               {vacancy?.more_technologies.map(({ name }) => (
                 <div key={name} className="technology">
                   {name}

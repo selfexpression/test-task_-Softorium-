@@ -1,32 +1,14 @@
-$more-stack-colors:
-#FF6633, 
-#0099CC, 
-#84D1ED, 
-#725CA8, 
-#2F7BBF, 
-#2671A2,
-#5ae328;
+@use "../variables.scss" as variable;
+@use "../mixins.scss" as mixin;
 
 .more-page-container {
   .more-title {
     margin-top: 10em;
     padding-bottom: 5em;
 
-    h1 {
-      font-size: 72px;
-      line-height: 72px;
-      color: #08162A;
-      margin: 0;
-    }
-
     h2 {
       display: inline-block;
-      font-size: 48px;
-      line-height: 48px;
-      background: linear-gradient(93.29deg, #0099CC 4.64%, #FF6633 58.75%);
-      background-clip: text;
-      color: transparent;
-      margin: 0;
+      @include mixin.text-bg-gradient;
     }
   }
 
@@ -45,82 +27,41 @@ $more-stack-colors:
     }
   }
 
-  .item-1 {
-    p {
-      font-size: 18px;
-      line-height: 28.8px;
-      padding: 2em 4em 2em 0;
-    }
-  }
-
   .item-2 {
-    .requirements {
+    .more-stack-wrapper {
       h4 {
-        font-size: 18px;
-        line-height: 28.8px;
-        color: #08162A;
+        margin: 0.5em;
       }
 
-      .requirement {
-        font-size: 16px;
-        line-height: 25.6px;
-        margin: 0.5em 0.5em 0.5em 2em;
+      .requirements {
+        .min_requirements {
+          margin: 0.5em 0.5em 0.5em 2em;
+        }
       }
-    }
 
-    .more-stack {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 1em;
-    
-        .technology {
+      .technologies {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        h4 {
+          flex-basis: 100%;
+        }
+
+        .more_technologies {
           padding: 0.4em;
           border-top-left-radius: 15px;
           border-bottom-right-radius: 15px;
-        }
-    }
-
-    .more-stack {
-    .technology {
-      @for $i from 1 through length($more-stack-colors) {
-        &:nth-of-type(#{$i}) {
-          background-color: nth($more-stack-colors, $i);
+  
+          @include mixin.stack-icon-bg-color(variable.$more-stack-colors);
         }
       }
+    }
+
+    .more-stack-wrapper {
+    .more_technologies {
+      @include mixin.stack-icon-bg-color(variable.$more-stack-colors);
     }
    } 
-  }
-
-  .item-3 {
-    .tasks {
-      h4 {
-        font-size: 18px;
-        line-height: 28.8px;
-        color: #08162A;
-      }
-
-      .task {
-        font-size: 16px;
-        line-height: 25.6px;
-        color: #000000;
-      }
-    }
-  }
-
-  .item-4 {
-    .list-offer {
-      h4 {
-        font-size: 18px;
-        line-height: 28.8px;
-        color: #08162A;
-      }
-
-      .offer-item {
-        font-size: 18px;
-        line-height: 28.8px;
-        color: #08162A;
-      }
-    }
   }
 }

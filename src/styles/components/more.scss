@@ -7,7 +7,8 @@
 
     h2 {
       display: inline-block;
-      margin-top: 0.2em;
+      margin-top: 0.5em;
+      padding-bottom: 0.1em;
       @include mixin.text-bg-gradient;
     }
   }
@@ -19,15 +20,13 @@
     margin-top: 5em;
 
     .image {
-      width: 688px;
-      height: 401px;
       object-fit: cover;
       object-position: center;
       border-radius: 15em;
     }
     
     > * {
-      flex: 0 1 50%;
+      flex: 0 1 40%;
       margin-bottom: 0.5em;
     }
 
@@ -132,7 +131,7 @@
         width: 100%;
         margin-left: 0 !important;
         margin-right: 0 !important;
-        margin-top: 2em;
+        margin-top: 2.5em;
       }
     }
 
@@ -140,14 +139,18 @@
       text-align: justify;
     }
 
-    .requirements {
-      .min_requirements {
-        margin-left: 1em !important;
-      }
-    }
+    .item-2 {
+      .more-stack-wrapper {
+        .requirements {
+          .min_requirements {
+            margin-left: 1em;
+          }
+        }
 
-    .technologies {
-      gap: 3px !important;
+        .technologies {
+          gap: 3px;
+        }
+      }
     }
 
     .tasks-wrapper {

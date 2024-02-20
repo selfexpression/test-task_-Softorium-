@@ -1,7 +1,7 @@
-import image1 from './image-1.jpeg';
-import image2 from './image-2.jpeg';
-import image3 from './image-3.jpeg';
-import image4 from './image-4.png';
+import image1 from './image-1.JPG';
+import image2 from './image-2.JPG';
+import image3 from './image-3.JPG';
+import image4 from './image-4.JPG';
 
 export const morePageImages = [
   { src: image1, id: 1 },
